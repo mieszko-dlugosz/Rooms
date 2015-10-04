@@ -2,8 +2,10 @@ require "Player"
 
 Gamepicture = Class{
   init = function(self)
-    self.player_server = Player(300, 500)
-    self.player_client = Player(500, 300)
+    self.player_server = Player(10 , 3)
+    self.player_client = Player(55, 34)
+    map = Map("C:\\Users\\Lenovo\\Desktop\\gamedev\\Love\\Rooms\\level1.txt")
+
   end;
   
   update_picture = function(self, serialized_picture)
@@ -15,7 +17,8 @@ Gamepicture = Class{
   end;
   
   draw = function(self)
-    love.graphics.print("playerClient", self.player_server.x, self.player_server.y)
-    love.graphics.print("playerServer", self.player_client.x, self.player_client.y)
+    map:draw()
+    self.player_server:draw()
+    self.player_client:draw()
   end;
 }
