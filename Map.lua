@@ -28,6 +28,8 @@ Map = Class{
     self.canvas = nil
   end;
   
+
+  
   draw = function(self)
     if not self.canvas_uptodate then
       self.canvas_uptodate = true
@@ -61,6 +63,29 @@ Map = Class{
       return true
     end
     return false
+  end;
+  
+  serialize = function(self)
+    local result = ""
+    for i=1, self.height do
+      for j=1, self.width do
+        result = result .. " " .. self[i][j]
+      end
+    end
+    return result
+  end;
+  
+  deserialize = function(self, data)
+    local j = 1
+    local i = 1
+    for s in string.gmatch(data, "%S") do
+      self[i][j] = tonumber(s)
+      j = j + 1
+      if j > self.width then
+        j = 1
+        i = i + 1
+      end
+    end
   end;
   --TODO: set canvas_uptodate to false when map is modified
 }

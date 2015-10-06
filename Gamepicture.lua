@@ -9,7 +9,10 @@ Gamepicture = Class{
   end;
   
   update_picture = function(self, serialized_picture)
-    self.player_server.x, self.player_server.y, self.player_client.x, self.player_client.y = serialized_picture:match("(%S*) (%S*) (%S*) (%S*)")
+    local tempa, tempb, tempc, tempd = serialized_picture:match("(%S*) (%S*) (%S*) (%S*)")
+    self.player_server.x, self.player_server.y, self.player_client.x, self.player_client.y = tonumber(tempa), tonumber(tempb), tonumber(tempc), tonumber(tempd)
+    self.player_server:dig_tile()
+    self.player_client:dig_tile()
   end;
   
   serialize_picture = function(self)
