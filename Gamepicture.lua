@@ -1,11 +1,12 @@
 require "Player"
-
+require "Room"
 Gamepicture = Class{
   init = function(self)
     self.player_server = Player(10 , 3)
     self.player_client = Player(55, 34)
     map = Map("C:\\Users\\Lenovo\\Desktop\\gamedev\\Love\\Rooms\\level1.txt")
-
+    rooms = {}
+    rooms[1] = Room("C:\\Users\\Lenovo\\Desktop\\gamedev\\Love\\Rooms\\room_cross.txt")
   end;
   
   update_picture = function(self, serialized_picture)

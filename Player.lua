@@ -16,6 +16,10 @@ Player = Class{
     if map[self.y][self.x] == 0 then
       map.canvas_uptodate = false
       map[self.y][self.x] = 15
+      print("#rooms: " ..#rooms)
+      for i=1, #rooms do
+        rooms[i]:match(self.y, self.x)
+      end
     end
   end;
   

@@ -46,7 +46,7 @@ Map = Class{
             love.graphics.setColor(255, 255, 255, 255)
           end
           if self[i][j] == 15 then
-            love.graphics.setColor(255, 255, 255, 255)
+            love.graphics.setColor(114, 71, 117, 255)
             love.graphics.rectangle("fill", (j-1)*tile_size, (i-1)*tile_size, tile_size, tile_size)
             love.graphics.setColor(255, 255, 255, 255)
 

@@ -1,0 +1,17 @@
+[header]
+width=3
+height=3
+tilewidth=20
+tileheight=20
+orientation=orthogonal
+
+[tilesets]
+tileset=../../../../../../Program Files (x86)/Tiled/examples/sewer_tileset.png,20,20,0,0
+
+[layer]
+type=Tile Layer 1
+data=
+0,15,0,
+15,15,15,
+0,15,0
+
