@@ -1,6 +1,6 @@
 
 colors = {}
-colors[15] = {114, 71, 117, 255}
+colors[15] = {236,0 , 255, 255}
 
 
 
@@ -51,7 +51,7 @@ Map = Class{
             love.graphics.setColor(255, 255, 255, 255)
           end
           if self[i][j] == 15 then
-            love.graphics.setColor(114, 71, 117, 255)
+            love.graphics.setColor(236, 0, 255, 255)
               
             love.graphics.rectangle("fill", (j-1)*tile_size, (i-1)*tile_size, tile_size, tile_size)
 
@@ -64,8 +64,13 @@ Map = Class{
     end
     
     love.graphics.setShader(light_effect)
+    love.graphics.setColor(255, 255, 255, 170)
+    love.graphics.draw(self.canvas, margin/2+10, margin/2+10)
     love.graphics.draw(self.canvas, margin/2, margin/2)
     love.graphics.setShader()
+    --love.graphics.draw(self.canvas, margin/2+5, margin/2+5)
+
+    
   end;
   
   penetrable = function(self, y, x)

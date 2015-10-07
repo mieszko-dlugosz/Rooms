@@ -16,7 +16,9 @@ light_effect = love.graphics.newShader [[
          pixel_coords.y = iScreenSize.y-pixel_coords.y;
           float dist = sqrt(pow(pixel_coords.y-light_pos.x, 2.0)+pow(pixel_coords.x-light_pos.y, 2.0))/20.0;
           vec4 texturecolor = Texel(texture, texture_coords);
-          return texturecolor * color*2.0/(dist/2.0+1.0);
+          if(texturecolor.x+texturecolor.y+texturecolor.z<0.1)
+            return texturecolor;
+          return texturecolor * 2.0/(pow(dist, 1.0)/2.0+2.5);
         }
     ]]
     
