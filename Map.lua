@@ -1,9 +1,12 @@
 
+colors = {}
+colors[15] = {114, 71, 117, 255}
+
+
 
 Map = Class{
   init = function(self, filename)
     io.input(filename)
-    
     local rows, cols = 0, 0
     for i=1, 13 do
       local line = io.read()
@@ -25,18 +28,20 @@ Map = Class{
     window_width = self.width*tile_size+margin
     love.window.setMode(window_width, window_height, {})
     self.canvas_uptodate = false
-    self.canvas = nil
+    self.canvas = love.graphics.newCanvas(self.width*tile_size, self.height*tile_size)
   end;
   
 
+
+  
   
   draw = function(self)
+    
     if not self.canvas_uptodate then
       self.canvas_uptodate = true
-      local rock = love.graphics.newImage("rock1.png") --TODO: move to init phase
-      self.canvas = love.graphics.newCanvas(self.width*tile_size, self.height*tile_size)
+      self.canvas:clear()
       love.graphics.setCanvas(self.canvas)
-      love.graphics.draw(rock, 0, 0, 0, self.width*tile_size/rock:getWidth(), self.height*tile_size/rock:getHeight() )
+      love.graphics.draw(rock_image, 0, 0, 0, self.width*tile_size/rock_image:getWidth(), self.height*tile_size/rock_image:getHeight() )
       
       for i=1, self.height do
         for j=1, self.width do
@@ -47,7 +52,9 @@ Map = Class{
           end
           if self[i][j] == 15 then
             love.graphics.setColor(114, 71, 117, 255)
+              
             love.graphics.rectangle("fill", (j-1)*tile_size, (i-1)*tile_size, tile_size, tile_size)
+
             love.graphics.setColor(255, 255, 255, 255)
 
           end
@@ -55,7 +62,10 @@ Map = Class{
       end
       love.graphics.setCanvas()
     end
+    
+    love.graphics.setShader(light_effect)
     love.graphics.draw(self.canvas, margin/2, margin/2)
+    love.graphics.setShader()
   end;
   
   penetrable = function(self, y, x)

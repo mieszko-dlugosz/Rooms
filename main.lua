@@ -3,12 +3,11 @@ Class = require "hump.class"
 local socket = require "socket"
 require "Gamepicture"
 require "Map"
+require "Shaders"
 
 local menu = {} -- previously: Gamestate.new()
 local game = {}
-local network_identity
 local address, port
-local gamepicture
 local connection_rate = 0.05
 local connection_timer = 0
 local moving_timer = 0.0
@@ -42,7 +41,8 @@ end
 
 function game:enter()
   io.stdout:setvbuf("no")
-  
+  rock_image = love.graphics.newImage("rock1.png") --TODO: move to init phase
+
   
   udp = socket.udp()
   udp:settimeout(0)
@@ -56,6 +56,7 @@ function game:enter()
 end
 
 function game:update(dt)
+  send_shader_vars()
   connection_timer = connection_timer+dt
   moving_timer = moving_timer + dt
   if connection_timer > connection_rate then
@@ -98,6 +99,7 @@ end
 
 function game:draw()
   gamepicture:draw()
+  love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
 end
 
 function game:keypressed(key, code)
